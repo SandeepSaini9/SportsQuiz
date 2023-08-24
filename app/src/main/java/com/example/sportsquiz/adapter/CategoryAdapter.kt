@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsquiz.databinding.CategoryitemBinding
-import com.example.sportsquiz.model.categoryModelClass
+import com.example.sportsquiz.model.CategoryModelClass
 
-class categoryadapter(var categoryList:ArrayList<categoryModelClass>):RecyclerView.Adapter<categoryadapter.MycategoryViewHolder>() {
+class CategoryAdapter(var categoryList:ArrayList<CategoryModelClass>):RecyclerView.Adapter<CategoryAdapter.MycategoryViewHolder>() {
     class MycategoryViewHolder(var binding: CategoryitemBinding):RecyclerView.ViewHolder(binding.root) {
 
 
