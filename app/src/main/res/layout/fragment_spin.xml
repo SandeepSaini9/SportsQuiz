@@ -36,21 +36,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
                 android:text="TextView"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/coinimage"
+                android:id="@+id/coinImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:src="@drawable/coin" />
 
             <TextView
-                android:id="@+id/coin"
+                android:id="@+id/coinText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
                 android:text="TextView"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -62,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:fontFamily="@font/poppins_extrabold"
             android:text="Left Chance :"
             android:textColor="@color/textColorWhite"
             android:textSize="24sp"
@@ -75,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:fontFamily="@font/poppins_extrabold"
             android:text="1"
             android:textColor="@color/textColorWhite"
             android:textSize="24sp"
@@ -120,6 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:backgroundTint="@color/buttonWhite"
+            android:fontFamily="@font/poppins_bold"
             android:text="Spin"
             android:textColor="@color/blackTextColor"
             app:cornerRadius="10dp"

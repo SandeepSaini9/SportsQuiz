@@ -10,6 +10,7 @@ import com.example.sportsquiz.R
 import com.example.sportsquiz.adapter.HistoryAdapter
 import com.example.sportsquiz.databinding.FragmentHistoryBinding
 import com.example.sportsquiz.model.HistoryModelClass
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class HistoryFragment : Fragment() {
     val binding by lazy {
@@ -28,6 +29,16 @@ class HistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding.coinImage.setOnClickListener {
+            val bottomSheetDialog: BottomSheetDialogFragment =WithdrawalFragment()
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Test")
+            bottomSheetDialog.enterTransition
+        }
+        binding.coinText.setOnClickListener {
+            val bottomSheetDialog: BottomSheetDialogFragment =WithdrawalFragment()
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Test")
+            bottomSheetDialog.enterTransition
+        }
         binding.HistoryRecyclerView.layoutManager=LinearLayoutManager(requireContext())
         var adaptor=HistoryAdapter(ListHistory)
         binding.HistoryRecyclerView.adapter=adaptor

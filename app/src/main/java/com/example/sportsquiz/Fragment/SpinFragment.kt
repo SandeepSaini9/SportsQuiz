@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sportsquiz.databinding.FragmentSpinBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Random
 
 class SpinFragment : Fragment() {
@@ -30,6 +31,16 @@ class SpinFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.coinImage.setOnClickListener {
+            val bottomSheetDialog: BottomSheetDialogFragment =WithdrawalFragment()
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Test")
+            bottomSheetDialog.enterTransition
+        }
+        binding.coinText.setOnClickListener {
+            val bottomSheetDialog: BottomSheetDialogFragment =WithdrawalFragment()
+            bottomSheetDialog.show(requireActivity().supportFragmentManager,"Test")
+            bottomSheetDialog.enterTransition
+        }
         binding.spin.setOnClickListener {
             binding.spin.isEnabled = false
 
