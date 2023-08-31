@@ -1,4 +1,4 @@
-package com.example.sportsquiz.Fragment
+package com.example.sportsquiz.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

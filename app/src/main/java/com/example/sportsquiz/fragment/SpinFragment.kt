@@ -1,5 +1,6 @@
-package com.example.sportsquiz.Fragment
+package com.example.sportsquiz.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -9,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sportsquiz.databinding.FragmentSpinBinding
 import com.example.sportsquiz.model.HistoryModelClass
-import com.example.sportsquiz.model.User
+import com.example.sportsquiz.model.Users
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -29,14 +30,14 @@ class SpinFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSpinBinding.inflate(inflater, container, false)
         Firebase.database.reference.child("Users").child(Firebase.auth.currentUser!!.uid)
             .addValueEventListener(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        var user = snapshot.getValue<User>()
-                        binding.Name.text = user?.name
+                        val user = snapshot.getValue<Users>()
+                        binding.name.text = user?.name
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -51,11 +52,11 @@ class SpinFragment : Fragment() {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            currentChance = snapshot.getValue() as Long
-                            binding.spinChance.text = (snapshot.getValue() as Long).toString()
+                            currentChance = snapshot.value as Long
+                            binding.spinChance.text = (snapshot.value as Long).toString()
 
                         } else {
-                            var temp = 0
+                            val temp = 0
                             binding.spinChance.text = temp.toString()
                             binding.spin.isEnabled = false
                         }
@@ -72,7 +73,7 @@ class SpinFragment : Fragment() {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
-                            currentCoins = snapshot.getValue() as Long
+                            currentCoins = snapshot.value as Long
                             binding.coinText.text = currentCoins.toString()
                         }
                     }
@@ -86,12 +87,13 @@ class SpinFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showResult(itemTitle: String, spin: Int) {
         if (spin % 2 == 0) {
-            var winCoin = itemTitle.toInt()
+            val winCoin = itemTitle.toInt()
             Firebase.database.reference.child("Player Coins").child(Firebase.auth.currentUser!!.uid)
                 .setValue(winCoin + currentCoins)
-            var historyModelClass =
+            val historyModelClass =
                 HistoryModelClass(System.currentTimeMillis().toString(), winCoin.toString(), false)
             Firebase.database.reference.child("Player Coins History")
                 .child(Firebase.auth.currentUser!!.uid).push()
@@ -100,7 +102,7 @@ class SpinFragment : Fragment() {
             binding.coinText.text = (winCoin + currentCoins).toString()
         }
         Toast.makeText(requireContext(), itemTitle, Toast.LENGTH_SHORT).show()
-        currentChance = currentChance - 1
+        currentChance -= 1
         Firebase.database.reference.child("Play Chance").child(Firebase.auth.currentUser!!.uid)
             .setValue(currentChance)
         binding.spin.isEnabled = true

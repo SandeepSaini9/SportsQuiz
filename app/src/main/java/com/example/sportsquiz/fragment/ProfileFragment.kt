@@ -1,4 +1,4 @@
-package com.example.sportsquiz.Fragment
+package com.example.sportsquiz.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.sportsquiz.R
 import com.example.sportsquiz.databinding.FragmentProfileBinding
-import com.example.sportsquiz.model.User
+import com.example.sportsquiz.model.Users
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,7 +20,7 @@ class ProfileFragment : Fragment() {
     val binding by lazy {
         FragmentProfileBinding.inflate(layoutInflater)
     }
-    var isExpand = true
+    private var isExpand = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -28,7 +28,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding.imageButton2.setOnClickListener {
             if (isExpand) {
                 binding.expandableconstraintLayout.visibility = View.VISIBLE
@@ -44,8 +44,8 @@ class ProfileFragment : Fragment() {
             .addValueEventListener(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        var user = snapshot.getValue<User>()
-                        binding.Name.text = user?.name
+                        val user = snapshot.getValue<Users>()
+                        binding.name.text = user?.name
                         binding.NameUp.text = user?.name
                         binding.Password.text = user?.password
                         binding.Email.text = user?.email

@@ -1,4 +1,4 @@
-package com.example.sportsquiz.Fragment
+package com.example.sportsquiz.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sportsquiz.R
 import com.example.sportsquiz.adapter.HistoryAdapter
 import com.example.sportsquiz.databinding.FragmentHistoryBinding
 import com.example.sportsquiz.model.HistoryModelClass
-import com.example.sportsquiz.model.User
+import com.example.sportsquiz.model.Users
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -74,8 +73,8 @@ class HistoryFragment : Fragment() {
             .addValueEventListener(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        var user = snapshot.getValue<User>()
-                        binding.Name.text = user?.name
+                        var user = snapshot.getValue<Users>()
+                        binding.name.text = user?.name
                     }
 
                     override fun onCancelled(error: DatabaseError) {

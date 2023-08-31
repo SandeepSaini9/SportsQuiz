@@ -1,6 +1,6 @@
 package com.example.sportsquiz.model
 
-class User {
+class Users {
     var name = ""
     var age = 0
     var email = ""

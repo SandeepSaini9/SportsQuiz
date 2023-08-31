@@ -1,13 +1,11 @@
 package com.example.sportsquiz
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.example.sportsquiz.Fragment.WithdrawalFragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sportsquiz.databinding.ActivityQuizBinding
-import com.example.sportsquiz.model.Question
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.sportsquiz.fragment.WithdrawalFragment
+import com.example.sportsquiz.model.Questions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -15,7 +13,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class QuizActivity : AppCompatActivity() {
@@ -25,7 +22,7 @@ class QuizActivity : AppCompatActivity() {
     var currentChance = 0L
     var currentQuestion = 0
     var score = 0
-    private lateinit var questionList: ArrayList<Question>
+    private lateinit var questionList: ArrayList<Questions>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -61,7 +58,7 @@ class QuizActivity : AppCompatActivity() {
                 }
             )
 
-        questionList = ArrayList<Question>()
+        questionList = ArrayList<Questions>()
         var image = intent.getIntExtra("categoryimg", 0)
         binding.categoryimg.setImageResource(image)
         var catText = intent.getStringExtra("questiontype")
@@ -69,7 +66,7 @@ class QuizActivity : AppCompatActivity() {
             .collection("questions").get().addOnSuccessListener { questionData ->
                 questionList.clear()
                 for (data in questionData.documents) {
-                    var question: Question? = data.toObject(Question::class.java)
+                    var question: Questions? = data.toObject(Questions::class.java)
                     questionList.add(question!!)
 
                 }

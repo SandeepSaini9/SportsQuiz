@@ -1,4 +1,4 @@
-package com.example.sportsquiz.Fragment
+package com.example.sportsquiz.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import com.example.sportsquiz.R
 import com.example.sportsquiz.adapter.CategoryAdapter
 import com.example.sportsquiz.databinding.FragmentHomeBinding
 import com.example.sportsquiz.model.CategoryModelClass
-import com.example.sportsquiz.model.User
+import com.example.sportsquiz.model.Users
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -67,8 +67,8 @@ class HomeFragment : Fragment() {
             .addValueEventListener(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        var user = snapshot.getValue<User>()
-                        binding.Name.text = user?.name
+                        var user = snapshot.getValue<Users>()
+                        binding.name.text = user?.name.toString()
                     }
 
                     override fun onCancelled(error: DatabaseError) {

@@ -3,11 +3,9 @@ package com.example.sportsquiz
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Toast
 import com.example.sportsquiz.databinding.ActivityMainBinding
-import com.example.sportsquiz.model.User
-import com.google.firebase.auth.FirebaseAuth
+import com.example.sportsquiz.model.Users
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -21,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.signUp.setOnClickListener {
-            if (binding.Name.text.toString().equals("") ||
+            if (binding.name.text.toString().equals("") ||
                 binding.age.text.toString().equals("") ||
                 binding.email.text.toString().equals("") ||
                 binding.password.text.toString().equals("")
@@ -33,15 +31,15 @@ class MainActivity : AppCompatActivity() {
                     binding.password.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        var user = User(
-                            binding.Name.text.toString(),
+                        val user = Users(
+                            binding.name.text.toString(),
                             binding.age.text.toString().toInt(),
                             binding.email.text.toString(),
                             binding.password.text.toString()
                         )
                         Firebase.database.reference.child("Users").child(
                             Firebase.auth.currentUser!!.uid
-                        ).push().setValue(user).addOnSuccessListener {
+                        ).setValue(user).addOnSuccessListener {
                             startActivity(Intent(this, HomeActivity::class.java))
                             finish()
                         }
