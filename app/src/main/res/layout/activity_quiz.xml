@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/secondbackground"
+    android:background="@drawable/thirdbackground"
     tools:context=".QuizActivity">
 
     <LinearLayout
@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/profile"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/avtar" />
 
@@ -33,14 +33,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_bold"
-            android:text="TextView"
+            android:text=""
+            android:textSize="18sp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/coinImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_weight="0"
             android:src="@drawable/coin" />
 
@@ -49,7 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="TextView"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -63,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/scince" />
+        app:srcCompat="@drawable/cricket" />
 
     <TextView
         android:id="@+id/textView15"
@@ -73,6 +77,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Question :"
         android:textColor="@color/textColorWhite"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="@+id/categoryimg"
         app:layout_constraintStart_toStartOf="@+id/categoryimg"
         app:layout_constraintTop_toBottomOf="@+id/categoryimg" />
@@ -82,9 +87,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
         android:fontFamily="@font/poppins_bold"
+        android:paddingStart="15dp"
+        android:paddingEnd="2dp"
         android:text="What is your name ?"
         android:textColor="@color/textColorWhite"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="@+id/textView15"
         app:layout_constraintStart_toStartOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -97,6 +106,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Select one of them"
         android:textColor="@color/textColorWhite"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="@+id/question"
         app:layout_constraintStart_toStartOf="@+id/question"
         app:layout_constraintTop_toBottomOf="@+id/question" />
@@ -110,8 +120,10 @@
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/buttonWhite"
         android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
         android:text="Option 1"
         android:textColor="@color/blackTextColor"
+        android:textSize="18dp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/textView17"
         app:layout_constraintStart_toStartOf="@+id/textView17"
@@ -126,8 +138,10 @@
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/buttonWhite"
         android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
         android:text="Option 2"
         android:textColor="@color/blackTextColor"
+        android:textSize="18dp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/option1"
         app:layout_constraintStart_toStartOf="@+id/option1"
@@ -142,8 +156,10 @@
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/buttonWhite"
         android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
         android:text="Option 3"
         android:textColor="@color/blackTextColor"
+        android:textSize="18dp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/option2"
         app:layout_constraintStart_toStartOf="@+id/option2"
@@ -158,15 +174,17 @@
         android:layout_marginEnd="15dp"
         android:backgroundTint="@color/buttonWhite"
         android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
         android:text="Option 4"
         android:textColor="@color/blackTextColor"
+        android:textSize="18dp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/option3"
         app:layout_constraintStart_toStartOf="@+id/option3"
         app:layout_constraintTop_toBottomOf="@+id/option3" />
 
     <LinearLayout
-        android:id="@+id/winner"
+        android:id="@+id/Winner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#7D7777"
@@ -194,7 +212,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_extrabold"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:text="Congratulations!!"
             android:textSize="28sp" />
@@ -202,7 +220,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sorry"
+        android:id="@+id/Sorry"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#7D7777"
@@ -229,7 +247,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/poppins_extrabold"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:text="Sorry You Have Lost"
             android:textSize="28sp" />

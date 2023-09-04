@@ -6,17 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sportsquiz.databinding.ActivityQuizBinding
 import com.example.sportsquiz.fragment.WithdrawalFragment
 import com.example.sportsquiz.model.Questions
+import com.example.sportsquiz.model.Users
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class QuizActivity : AppCompatActivity() {
-    private val binding by lazy {
+    val binding by lazy {
         ActivityQuizBinding.inflate(layoutInflater)
     }
     var currentChance = 0L
@@ -27,6 +29,20 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        Firebase.database.reference.child("Play Chance").child(Firebase.auth.currentUser!!.uid)
+            .addValueEventListener(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            currentChance = snapshot.value as Long
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                }
+            )
         Firebase.database.reference.child("Player Coins").child(Firebase.auth.currentUser!!.uid)
             .addValueEventListener(
                 object : ValueEventListener {
@@ -43,19 +59,20 @@ class QuizActivity : AppCompatActivity() {
                 }
             )
 
-        Firebase.database.reference.child("Play Chance").child(Firebase.auth.currentUser!!.uid)
+        Firebase.database.reference.child("Users").child(Firebase.auth.currentUser!!.uid)
             .addValueEventListener(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()) {
-                            currentChance = snapshot.value as Long
-                        }
+                        var user = snapshot.getValue<Users>()
+                        binding.name.text = user?.name.toString()
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-
+                        // TODO("Not yet implemented")
                     }
+
                 }
+
             )
 
         questionList = ArrayList<Questions>()
@@ -108,20 +125,23 @@ class QuizActivity : AppCompatActivity() {
             score += 10
         }
         currentQuestion++
+
         if (currentQuestion >= questionList.size) {
             //if score is above 60 percent
-            if (score >= (score / (questionList.size * 10)) * 100) {
-                binding.winner.visibility = View.VISIBLE
+            if (score>=(score/(questionList.size*10))*100) {
+                binding.Sorry.visibility = View.VISIBLE
                 Firebase.database.reference.child("Play Chance")
-                    .child(Firebase.auth.currentUser!!.uid).setValue(currentChance + 1)
+                    .child(Firebase.auth.currentUser!!.uid).setValue(currentChance - 1)
                 var isUpdated = false
                 if (isUpdated) {
 
-                } else {
-
                 }
-            } else {
-                binding.sorry.visibility = View.VISIBLE
+            }else {
+                binding.Winner.visibility = View.VISIBLE
+                Firebase.database.reference.child("Play Chance")
+                    .child(Firebase.auth.currentUser!!.uid).setValue(currentChance + 1)
+                var isUpdated = false
+
             }
         } else {
             binding.question.text = questionList.get(currentQuestion).question

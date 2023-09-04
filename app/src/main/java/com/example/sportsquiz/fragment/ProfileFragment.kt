@@ -23,6 +23,7 @@ class ProfileFragment : Fragment() {
     private var isExpand = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
