@@ -131,7 +131,7 @@ class QuizActivity : AppCompatActivity() {
             if (score>=(score/(questionList.size*10))*100) {
                 binding.Sorry.visibility = View.VISIBLE
                 Firebase.database.reference.child("Play Chance")
-                    .child(Firebase.auth.currentUser!!.uid).setValue(currentChance - 1)
+                    .child(Firebase.auth.currentUser!!.uid).setValue(currentChance)
                 var isUpdated = false
                 if (isUpdated) {
 
